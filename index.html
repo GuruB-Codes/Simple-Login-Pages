@@ -1,293 +1,913 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple Login Pages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
+    <title>Simple Login Pages | Open Source</title>
 
-body{
-    background:#f5f7fb;
-    color:#222;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        }
 
-/* Hero */
+        html {
+            scroll-behavior: smooth;
+        }
 
-.hero{
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-    color:white;
-    text-align:center;
-    padding:80px 20px;
-}
+        body {
+            background: #070b17;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
 
-.hero h1{
-    font-size:48px;
-    margin-bottom:15px;
-}
+        /* =========================
+           BACKGROUND EFFECT
+        ========================= */
 
-.hero p{
-    font-size:18px;
-    max-width:700px;
-    margin:auto;
-    line-height:1.6;
-}
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #7c3aed;
+            filter: blur(180px);
+            opacity: 0.18;
+            top: -150px;
+            left: -150px;
+            z-index: -2;
+        }
 
-.btn{
-    display:inline-block;
-    margin-top:30px;
-    padding:14px 30px;
-    background:white;
-    color:#2563eb;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
-    transition:.3s;
-}
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #06b6d4;
+            filter: blur(180px);
+            opacity: 0.12;
+            right: -150px;
+            bottom: -100px;
+            z-index: -2;
+        }
 
-.btn:hover{
-    transform:translateY(-3px);
-}
+        /* =========================
+           NAVBAR
+        ========================= */
 
-/* About */
+        nav {
+            width: 100%;
+            padding: 22px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
 
-.about{
-    max-width:1000px;
-    margin:60px auto;
-    padding:0 20px;
-    text-align:center;
-}
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
 
-.about h2{
-    font-size:34px;
-    margin-bottom:20px;
-}
+        .logo span {
+            color: #8b5cf6;
+        }
 
-.about p{
-    color:#555;
-    line-height:1.8;
-}
+        nav a {
+            text-decoration: none;
+            color: #cbd5e1;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
 
-/* Stats */
+        nav a:hover {
+            color: #ffffff;
+        }
 
-.stats{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    flex-wrap:wrap;
-    margin-top:40px;
-}
+        .nav-btn {
+            padding: 10px 18px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 30px;
+            background: rgba(255,255,255,0.06);
+        }
 
-.stat{
-    background:white;
-    width:220px;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
+        /* =========================
+           HERO
+        ========================= */
 
-.stat h3{
-    font-size:35px;
-    color:#2563eb;
-}
+        .hero {
+            min-height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 130px 20px 90px;
+            position: relative;
+        }
 
-.stat p{
-    margin-top:10px;
-}
+        .hero-content {
+            max-width: 900px;
+        }
 
-/* Gallery */
+        .badge {
+            display: inline-block;
+            padding: 9px 18px;
+            border-radius: 50px;
+            background: rgba(139,92,246,0.12);
+            border: 1px solid rgba(139,92,246,0.35);
+            color: #c4b5fd;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 28px;
+            backdrop-filter: blur(10px);
+        }
 
-.gallery{
-    max-width:1200px;
-    margin:70px auto;
-    padding:0 20px;
-}
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 86px);
+            line-height: 1.05;
+            font-weight: 900;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+        }
 
-.gallery h2{
-    text-align:center;
-    margin-bottom:40px;
-    font-size:35px;
-}
+        .gradient-text {
+            background: linear-gradient(
+                90deg,
+                #8b5cf6,
+                #06b6d4,
+                #38bdf8
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
+        .hero p {
+            max-width: 720px;
+            margin: auto;
+            color: #94a3b8;
+            font-size: 18px;
+            line-height: 1.8;
+        }
 
-.card{
-    background:white;
-    border-radius:12px;
-    padding:30px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-    transition:.3s;
-    text-align:center;
-}
+        .hero-buttons {
+            margin-top: 38px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-.card:hover{
-    transform:translateY(-8px);
-}
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
 
-.card h3{
-    margin-bottom:15px;
-}
+        .primary-btn {
+            color: white;
+            background: linear-gradient(135deg, #7c3aed, #2563eb);
+            box-shadow: 0 10px 35px rgba(124,58,237,0.35);
+        }
 
-.card p{
-    color:#666;
-    margin-bottom:20px;
-}
+        .primary-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 45px rgba(124,58,237,0.5);
+        }
 
-.card a{
-    display:inline-block;
-    padding:12px 24px;
-    background:#2563eb;
-    color:white;
-    text-decoration:none;
-    border-radius:8px;
-}
+        .secondary-btn {
+            color: #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
 
-/* Footer */
+        .secondary-btn:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-4px);
+        }
 
-footer{
-    margin-top:80px;
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:30px 20px;
-}
+        /* Floating glow */
 
-footer p{
-    margin:8px;
-}
+        .hero-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(139,92,246,0.15);
+            box-shadow:
+                0 0 80px rgba(124,58,237,0.12),
+                inset 0 0 80px rgba(6,182,212,0.08);
+            z-index: -1;
+        }
 
-@media(max-width:600px){
+        /* =========================
+           SECTION
+        ========================= */
 
-.hero h1{
-    font-size:34px;
-}
+        section {
+            padding: 90px 7%;
+        }
 
-.about h2,
-.gallery h2{
-    font-size:28px;
-}
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
 
-}
-</style>
+        .section-title .small-title {
+            color: #8b5cf6;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
 
+        .section-title h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-text {
+            color: #94a3b8;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            max-width: 1100px;
+            margin: 55px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stat {
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.09);
+
+            backdrop-filter: blur(15px);
+
+            transition: 0.35s;
+        }
+
+        .stat:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139,92,246,0.45);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .stat-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .stat h3 {
+            font-size: 30px;
+            background: linear-gradient(90deg,#8b5cf6,#22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat p {
+            margin-top: 8px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CONTRIBUTORS
+        ========================= */
+
+        .gallery {
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            position: relative;
+            padding: 32px;
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.07),
+                    rgba(255,255,255,0.025)
+                );
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            backdrop-filter: blur(20px);
+
+            transition: 0.4s;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: #7c3aed;
+            filter: blur(90px);
+            opacity: 0.12;
+            top: -80px;
+            right: -50px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(139,92,246,0.45);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+        }
+
+        .avatar {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background: linear-gradient(
+                135deg,
+                #7c3aed,
+                #2563eb
+            );
+
+            font-size: 27px;
+            font-weight: 800;
+
+            margin-bottom: 22px;
+
+            box-shadow: 0 10px 30px rgba(124,58,237,0.3);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            background: rgba(139,92,246,0.12);
+            border: 1px solid rgba(139,92,246,0.25);
+
+            color: #c4b5fd;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .card a:hover {
+            background: #7c3aed;
+            color: white;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            max-width: 1050px;
+            margin: 40px auto 100px;
+
+            text-align: center;
+
+            padding: 70px 30px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,58,237,0.2),
+                    rgba(6,182,212,0.1)
+                );
+
+            border: 1px solid rgba(139,92,246,0.25);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: #7c3aed;
+            filter: blur(130px);
+            opacity: 0.2;
+            left: -100px;
+            top: -150px;
+        }
+
+        .cta h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .cta p {
+            color: #94a3b8;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 45px 20px;
+            text-align: center;
+
+            border-top: 1px solid rgba(255,255,255,0.08);
+
+            background: rgba(0,0,0,0.2);
+        }
+
+        footer strong {
+            font-size: 17px;
+        }
+
+        footer p {
+            color: #64748b;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .footer-gradient {
+            color: #a78bfa;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 768px) {
+
+            nav {
+                padding: 20px;
+            }
+
+            nav .nav-links {
+                display: none;
+            }
+
+            .hero {
+                min-height: 650px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 70px 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width: 480px) {
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<section class="hero">
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-<h1>🚀 Simple Login Pages</h1>
+    <nav>
 
-<p>
-Welcome to our beginner-friendly Open Source project!
-Create beautiful login pages using only HTML and CSS,
-submit your contribution, and become part of our growing community.
-</p>
+        <div class="logo">
+            Simple<span>Login</span>
+        </div>
 
-<a href="https://github.com/YOUR_USERNAME/Simple-Login-Pages" class="btn">
-⭐ Star this Repository
-</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#contributors">Contributors</a>
+            <a href="#contribute">Contribute</a>
 
-</section>
+            <a
+                href="https://github.com/YOUR_USERNAME/Simple-Login-Pages"
+                target="_blank"
+                class="nav-btn"
+            >
+                GitHub ↗
+            </a>
+        </div>
 
-<section class="about">
+    </nav>
 
-<h2>Why Contribute?</h2>
 
-<p>
-Whether this is your first Pull Request or your hundredth,
-everyone is welcome here. Build your own login page,
-share your creativity, improve your GitHub profile,
-and learn Open Source by contributing to a real project.
-</p>
+    <!-- =========================
+         HERO
+    ========================== -->
 
-<div class="stats">
+    <section class="hero">
 
-<div class="stat">
-<h3>HTML</h3>
-<p>Only one HTML file required.</p>
-</div>
+        <div class="hero-glow"></div>
 
-<div class="stat">
-<h3>Open Source</h3>
-<p>Perfect for first-time contributors.</p>
-</div>
+        <div class="hero-content">
 
-<div class="stat">
-<h3>Community</h3>
-<p>Every accepted contribution is showcased below.</p>
-</div>
+            <div class="badge">
+                ✨ OPEN SOURCE • BEGINNER FRIENDLY
+            </div>
 
-</div>
+            <h1>
+                Build.
+                <span class="gradient-text">Contribute.</span>
+                Inspire.
+            </h1>
 
-</section>
+            <p>
+                Welcome to Simple Login Pages — an open-source project
+                where developers create beautiful login pages using
+                HTML and CSS while learning the power of open source.
+            </p>
 
-<section class="gallery">
+            <div class="hero-buttons">
 
-<h2>🌟 Contributors Showcase</h2>
+                <a
+                    href="https://github.com/YOUR_USERNAME/Simple-Login-Pages"
+                    target="_blank"
+                    class="btn primary-btn"
+                >
+                    ⭐ Star on GitHub
+                </a>
 
-<div class="cards">
+                <a href="#contributors" class="btn secondary-btn">
+                    👥 Explore Contributors
+                </a>
 
-<!-- Copy this card whenever you accept a PR -->
+            </div>
 
-<div class="card">
-<h3>Guru</h3>
-<p>Simple Responsive Login Page</p>
-<a href="Contributors/GuruB-Codes.html" target="_blank">
-View Login Page
-</a>
-</div>
+        </div>
 
-    <div class="card">
-<h3>Laxmikanth</h3>
-<p>Simple Responsive Login Page</p>
-<a href="Contributors/Laxmikant-772.html" target="_blank">
-View Login Page
-</a>
-</div>
-    
-        <div class="card">
-<h3>Laxmikanth</h3>
-<p>Simple Responsive Login Page</p>
-<a href="Contributors/beautifulbimba.html" target="_blank">
-View Login Page
-</a>
-</div>
+    </section>
 
-<!-- Example -->
 
-<!--
+    <!-- =========================
+         ABOUT
+    ========================== -->
 
-<div class="card">
-<h3>alex-dev</h3>
-<p>Glassmorphism Login</p>
-<a href="Contributors/alex-dev.html" target="_blank">
-View Login Page
-</a>
-</div>
+    <section id="about">
 
--->
+        <div class="about">
 
-</div>
+            <div class="section-title">
 
-</section>
+                <div class="small-title">
+                    WHY THIS PROJECT?
+                </div>
 
-<footer>
+                <h2>
+                    Learn by <span class="gradient-text">Building</span>
+                </h2>
 
-<p><strong>Made with ❤️ for the Open Source Community</strong></p>
+            </div>
 
-<p>Every merged Pull Request deserves a place here.</p>
+            <p class="about-text">
 
-</footer>
+                Whether you're creating your first Pull Request or you're
+                already an experienced developer, you're welcome here.
+                Design your own login page, submit your contribution,
+                learn Git and GitHub, improve your portfolio, and become
+                part of a growing open-source community.
+
+            </p>
+
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-icon">💻</div>
+
+                    <h3>HTML + CSS</h3>
+
+                    <p>
+                        Simple technologies.
+                        Unlimited creativity.
+                    </p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">🌎</div>
+
+                    <h3>Open Source</h3>
+
+                    <p>
+                        Everyone can learn,
+                        contribute and grow.
+                    </p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">🚀</div>
+
+                    <h3>Community</h3>
+
+                    <p>
+                        Every accepted contribution
+                        gets showcased.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTRIBUTORS
+    ========================== -->
+
+    <section id="contributors">
+
+        <div class="gallery">
+
+            <div class="section-title">
+
+                <div class="small-title">
+                    COMMUNITY
+                </div>
+
+                <h2>
+                    🌟 Contributors
+                </h2>
+
+                <p>
+                    Meet the developers who are helping
+                    this project grow.
+                </p>
+
+            </div>
+
+
+            <div class="cards">
+
+
+                <!-- GURU -->
+
+                <div class="card">
+
+                    <div class="avatar">
+                        G
+                    </div>
+
+                    <h3>Guru</h3>
+
+                    <p>
+                        Simple Responsive Login Page
+                    </p>
+
+                    <a
+                        href="Contributors/GuruB-Codes.html"
+                        target="_blank"
+                    >
+                        View Login Page →
+                    </a>
+
+                </div>
+
+
+                <!-- LAXMIKANTH -->
+
+                <div class="card">
+
+                    <div class="avatar">
+                        L
+                    </div>
+
+                    <h3>Laxmikanth</h3>
+
+                    <p>
+                        Simple Responsive Login Page
+                    </p>
+
+                    <a
+                        href="Contributors/Laxmikant-772.html"
+                        target="_blank"
+                    >
+                        View Login Page →
+                    </a>
+
+                </div>
+
+
+                <!-- BIMBA -->
+
+                <div class="card">
+
+                    <div class="avatar">
+                        B
+                    </div>
+
+                    <h3>Bimba</h3>
+
+                    <p>
+                        Simple Responsive Login Page
+                    </p>
+
+                    <a
+                        href="Contributors/beautifulbimba.html"
+                        target="_blank"
+                    >
+                        View Login Page →
+                    </a>
+
+                </div>
+
+
+                <!--
+                =========================
+                ADD NEW CONTRIBUTORS HERE
+                =========================
+
+                <div class="card">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <h3>alex-dev</h3>
+
+                    <p>
+                        Glassmorphism Login Page
+                    </p>
+
+                    <a
+                        href="Contributors/alex-dev.html"
+                        target="_blank"
+                    >
+                        View Login Page →
+                    </a>
+
+                </div>
+
+                -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section id="contribute">
+
+        <div class="cta">
+
+            <h2>
+                Ready to make your mark? 🚀
+            </h2>
+
+            <p>
+                Create your login page, submit a Pull Request,
+                and become part of the community.
+            </p>
+
+            <a
+                href="https://github.com/YOUR_USERNAME/Simple-Login-Pages"
+                target="_blank"
+                class="btn primary-btn"
+            >
+                ⭐ Start Contributing
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            <strong>
+                Made with ❤️ by the Open Source Community
+            </strong>
+        </p>
+
+        <p>
+            Built with HTML & CSS •
+            <span class="footer-gradient">
+                Every Contribution Matters 🚀
+            </span>
+        </p>
+
+    </footer>
 
 </body>
 </html>
+```
