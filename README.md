@@ -94,6 +94,8 @@ If you like this project:
 This project is licensed under the **MIT License**.
 
 
+Author -- Gurulingappa
+
 
 ## ❤️ Happy Contributing!
 
